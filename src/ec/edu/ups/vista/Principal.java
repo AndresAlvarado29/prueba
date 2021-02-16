@@ -7,36 +7,39 @@ package ec.edu.ups.vista;
 
 import ec.edu.ups.controlador.ControladorAutoridad;
 import ec.edu.ups.controlador.ControladorContrayente;
-import javax.swing.JButton;
+import ec.edu.ups.controlador.ControladorMatrimonio;
+import ec.edu.ups.controlador.ControladorContrayente;
+import ec.edu.ups.modelo.Matrimonio;
+import java.time.LocalDate;
 
 /**
  *
- * @author Andres
+ * @author ariel
  */
 public class Principal extends javax.swing.JFrame {
-private RegistrarUsuario registrarUsuario;
-private Iniciar iniciar;
-private ControladorAutoridad controladorAutoridad;
-private RegistarMatrimonio registrarMatrimonio;
-private ControladorContrayente controladorContrayente;
+    
+    private VentanaRegistrarUsuario ventanaAgregarNuevoJuez;
+    private VentanaIniciarSecion ventanaIniciarSecion;
+    private VentanaRegistros ventanaRegistros;
+    private VentanaMatrimoniosRegistrados ventanaMatrimoniosRegistrados;
+    private ControladorAutoridad controladorAutoridad;
+    private ControladorContrayente controladorContrayente;
+    private ControladorMatrimonio controladorMatrimonio;
+    
+
     /**
-     * Creates new form Principal
+     * Creates new form VentanaPrincipal
      */
     public Principal() {
         initComponents();
-        iniciar=new Iniciar(this);
-        registrarUsuario=new RegistrarUsuario(controladorAutoridad);
-        registrarMatrimonio=new RegistarMatrimonio(controladorContrayente);
-        jDesktopPane1.add(registrarUsuario);
-        jDesktopPane1.add(iniciar);
-        jDesktopPane1.add(registrarMatrimonio);
-        btnRM.setVisible(false);
+        controladorAutoridad = ControladorAutoridad.getInstancia();
+        controladorContrayente = controladorContrayente.getInstancia();
+        controladorMatrimonio = ControladorMatrimonio.getInstancia();
+        ventanaAgregarNuevoJuez = new VentanaRegistrarUsuario(controladorAutoridad);
+        ventanaIniciarSecion = new VentanaIniciarSecion(controladorAutoridad, controladorContrayente, controladorMatrimonio);
+        ventanaRegistros = new VentanaRegistros(controladorAutoridad, controladorContrayente);
+        ventanaMatrimoniosRegistrados = new VentanaMatrimoniosRegistrados(controladorMatrimonio);
     }
-
-    public JButton getBtnRM() {
-        return btnRM;
-    }
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -47,23 +50,55 @@ private ControladorContrayente controladorContrayente;
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jDesktopPane1 = new javax.swing.JDesktopPane();
         jPanel1 = new javax.swing.JPanel();
-        btnRM = new javax.swing.JButton();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
+        jLabelTitulo = new javax.swing.JLabel();
+        jLabelIcono = new javax.swing.JLabel();
+        jButtonIniciarSecion = new javax.swing.JButton();
+        jButtonPersonasRegistradas = new javax.swing.JButton();
+        jButtonAgregarNuevoJuez = new javax.swing.JButton();
+        jButtonMatrimoniosRegistrados = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Matrimonios UPS");
+        setResizable(false);
 
-        jPanel1.setBackground(new java.awt.Color(51, 153, 255));
+        jPanel1.setBackground(new java.awt.Color(102, 153, 255));
 
-        btnRM.setText("Registrar Matrimonio");
-        btnRM.addActionListener(new java.awt.event.ActionListener() {
+        jLabelTitulo.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabelTitulo.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelTitulo.setText("MATRIMONIOS   UPS");
+
+        jLabelIcono.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/recien-casados.png"))); // NOI18N
+
+        jButtonIniciarSecion.setBackground(new java.awt.Color(204, 204, 204));
+        jButtonIniciarSecion.setText("Registrar Matrimonio");
+        jButtonIniciarSecion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRMActionPerformed(evt);
+                jButtonIniciarSecionActionPerformed(evt);
+            }
+        });
+
+        jButtonPersonasRegistradas.setBackground(new java.awt.Color(204, 204, 204));
+        jButtonPersonasRegistradas.setText("Registros de Personas");
+        jButtonPersonasRegistradas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonPersonasRegistradasActionPerformed(evt);
+            }
+        });
+
+        jButtonAgregarNuevoJuez.setBackground(new java.awt.Color(204, 204, 204));
+        jButtonAgregarNuevoJuez.setText("Registar Autoridad");
+        jButtonAgregarNuevoJuez.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAgregarNuevoJuezActionPerformed(evt);
+            }
+        });
+
+        jButtonMatrimoniosRegistrados.setBackground(new java.awt.Color(204, 204, 204));
+        jButtonMatrimoniosRegistrados.setText("Listas de Matrimonios");
+        jButtonMatrimoniosRegistrados.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonMatrimoniosRegistradosActionPerformed(evt);
             }
         });
 
@@ -71,94 +106,83 @@ private ControladorContrayente controladorContrayente;
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabelTitulo)
+                .addGap(101, 101, 101))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(39, 39, 39)
-                .addComponent(btnRM)
-                .addContainerGap(230, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jButtonIniciarSecion, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabelIcono)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButtonAgregarNuevoJuez, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jButtonPersonasRegistradas, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonMatrimoniosRegistrados, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(32, 32, 32)
-                .addComponent(btnRM)
-                .addContainerGap(246, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jLabelTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabelIcono))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButtonIniciarSecion)
+                            .addComponent(jButtonAgregarNuevoJuez))))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonPersonasRegistradas)
+                    .addComponent(jButtonMatrimoniosRegistrados))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-
-        jDesktopPane1.setLayer(jPanel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
-        jDesktopPane1.setLayout(jDesktopPane1Layout);
-        jDesktopPane1Layout.setHorizontalGroup(
-            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        jDesktopPane1Layout.setVerticalGroup(
-            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-
-        jMenu1.setText("Inicio");
-
-        jMenuItem2.setText("Registrase");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
-            }
-        });
-        jMenu1.add(jMenuItem2);
-
-        jMenuItem3.setText("Iniciar Sesion");
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem3ActionPerformed(evt);
-            }
-        });
-        jMenu1.add(jMenuItem3);
-
-        jMenuItem4.setText("Salir");
-        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem4ActionPerformed(evt);
-            }
-        });
-        jMenu1.add(jMenuItem4);
-
-        jMenuBar1.add(jMenu1);
-
-        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane1)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane1)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-         if (!registrarUsuario.isVisible()) {
-            registrarUsuario.setVisible(true);
-        }
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
+    private void jButtonIniciarSecionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIniciarSecionActionPerformed
+        // TODO add your handling code here:
+        ventanaIniciarSecion.setVisible(true);
+    }//GEN-LAST:event_jButtonIniciarSecionActionPerformed
 
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-iniciar.setVisible(true);
+    private void jButtonPersonasRegistradasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPersonasRegistradasActionPerformed
+        // TODO add your handling code here:
+        ventanaRegistros.setVisible(true);
+        ventanaRegistros.cargarDatosPersonas();
+    }//GEN-LAST:event_jButtonPersonasRegistradasActionPerformed
 
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
+    private void jButtonAgregarNuevoJuezActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgregarNuevoJuezActionPerformed
+        // TODO add your handling code here:
+        ventanaAgregarNuevoJuez.setVisible(true);
+    }//GEN-LAST:event_jButtonAgregarNuevoJuezActionPerformed
 
-    private void btnRMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRMActionPerformed
-        registrarMatrimonio.setVisible(true);
-    }//GEN-LAST:event_btnRMActionPerformed
-
-    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-     System.exit(0);
-    }//GEN-LAST:event_jMenuItem4ActionPerformed
+    private void jButtonMatrimoniosRegistradosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMatrimoniosRegistradosActionPerformed
+        // TODO add your handling code here:
+        ventanaMatrimoniosRegistrados.setVisible(true);
+        ventanaMatrimoniosRegistrados.cargarDatos();
+    }//GEN-LAST:event_jButtonMatrimoniosRegistradosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -186,6 +210,9 @@ iniciar.setVisible(true);
             java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -196,13 +223,12 @@ iniciar.setVisible(true);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnRM;
-    private javax.swing.JDesktopPane jDesktopPane1;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JButton jButtonAgregarNuevoJuez;
+    private javax.swing.JButton jButtonIniciarSecion;
+    private javax.swing.JButton jButtonMatrimoniosRegistrados;
+    private javax.swing.JButton jButtonPersonasRegistradas;
+    private javax.swing.JLabel jLabelIcono;
+    private javax.swing.JLabel jLabelTitulo;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

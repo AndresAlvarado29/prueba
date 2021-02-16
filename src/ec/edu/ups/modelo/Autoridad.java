@@ -5,103 +5,75 @@
  */
 package ec.edu.ups.modelo;
 
-import java.util.Objects;
+import java.io.Serializable;
+import java.time.LocalDate;
 
 /**
  *
- * @author Andres
+ * @author ariel
  */
-public class Autoridad {
-    private String nombre;
-    private String apellido;
-    private String cedula;
-    private String direccion;
-    private String genero;
-    private String fechaDeNacimiento;
+public class Autoridad extends Contrayente implements Serializable{
+    
+    private String usuario;
+    private String contraseña;
+    private String fecha;
+
+    public Autoridad(String usuario, String contraseña, String fecha, String cedula) {
+        super(cedula);
+        this.usuario = usuario;
+        this.contraseña = contraseña;
+        this.fecha = fecha;
+    }
 
     public Autoridad() {
     }
 
-    public Autoridad(String nombre, String apellido, String cedula, String direccion, String genero, String fechaDeNacimiento) {
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.cedula = cedula;
-        this.direccion = direccion;
-        this.genero = genero;
-        this.fechaDeNacimiento = fechaDeNacimiento;
+    public Autoridad(String usuario, String contraseña, String fecha, int codigo, String nombre, String apellido, String cedula) {
+        super(codigo, nombre, apellido, cedula);
+        this.usuario = usuario;
+        this.contraseña = contraseña;
+        this.fecha = fecha;
     }
 
-    public String getNombre() {
-        return nombre;
+    
+    
+
+    public Autoridad(String usuario, String contraseña) {
+        this.usuario = usuario;
+        this.contraseña = contraseña;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public Autoridad(String usuario, String contraseña, int codigo, String nombre, String apellido, String cedula, String direccion, String Genero, LocalDate fechaDeNacimineto, String estadoCivil) {
+        super(codigo, nombre, apellido, cedula, direccion, Genero, fechaDeNacimineto, estadoCivil);
+        this.usuario = usuario;
+        this.contraseña = contraseña;
     }
 
-    public String getApellido() {
-        return apellido;
-    }
-
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
-    }
-
-    public String getCedula() {
-        return cedula;
-    }
-
-    public void setCedula(String cedula) {
-        this.cedula = cedula;
-    }
-
-    public String getDireccion() {
-        return direccion;
-    }
-
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
-    }
-
-    public String getGenero() {
-        return genero;
-    }
-
-    public void setGenero(String genero) {
-        this.genero = genero;
-    }
-
-    public String getFechaDeNacimiento() {
-        return fechaDeNacimiento;
-    }
-
-    public void setFechaDeNacimiento(String fechaDeNacimiento) {
-        this.fechaDeNacimiento = fechaDeNacimiento;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 43 * hash + Objects.hashCode(this.cedula);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Autoridad other = (Autoridad) obj;
-        if (!Objects.equals(this.cedula, other.cedula)) {
-            return false;
-        }
-        return true;
-    }
      
+    
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
+
+    public String getContraseña() {
+        return contraseña;
+    }
+
+    public void setContraseña(String contraseña) {
+        this.contraseña = contraseña;
+    }
+
+    public String getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
+    }
+    
 }
