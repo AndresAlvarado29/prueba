@@ -57,7 +57,7 @@ public class VentanaMatrimoniosRegistrados extends javax.swing.JFrame {
 
         setResizable(false);
 
-        jPanel1.setBackground(new java.awt.Color(0, 153, 204));
+        jPanel1.setBackground(new java.awt.Color(102, 153, 255));
 
         jLabelTitulo.setFont(new java.awt.Font("Georgia", 0, 24)); // NOI18N
         jLabelTitulo.setForeground(new java.awt.Color(255, 255, 255));
