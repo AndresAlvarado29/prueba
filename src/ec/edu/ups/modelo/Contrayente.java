@@ -5,43 +5,69 @@
  */
 package ec.edu.ups.modelo;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Objects;
 
 /**
  *
- * @author Andres
+ * @author ariel
  */
-public class Contrayente {
-
+public class Contrayente implements Serializable{
+    
+    private int codigo;
     private String nombre;
     private String apellido;
     private String cedula;
     private String direccion;
-    private String genero;
-    private String fechaDeNacimiento;
-    private String lugar;
-    private List<Contrayente> parejas;
-    private List<Testigo> testigos;
+    private String Genero;
+    private LocalDate fechaDeNacimineto;
+    private String estadoCivil;
 
     public Contrayente() {
     }
 
-    public Contrayente(String nombre, String apellido, String cedula, String direccion, String genero, String fechaDeNacimiento) {
+    public Contrayente(int codigo, String nombre, String apellido, String cedula, String direccion, String Genero, String estadoCivil) {
+        this.codigo = codigo;
         this.nombre = nombre;
         this.apellido = apellido;
         this.cedula = cedula;
         this.direccion = direccion;
-        this.genero = genero;
-        this.fechaDeNacimiento = fechaDeNacimiento;
-        parejas=new ArrayList<>();
-        testigos=new ArrayList<>();
-        
+        this.Genero = Genero;
+        this.estadoCivil = estadoCivil;
     }
 
+    public Contrayente(String cedula) {
+        this.cedula = cedula;
+    }
+
+    public Contrayente(int codigo, String nombre, String apellido, String cedula) {
+        this.codigo = codigo;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.cedula = cedula;
+    }
     
 
+    public Contrayente(int codigo, String nombre, String apellido, String cedula, String direccion, String Genero, LocalDate fechaDeNacimineto, String estadoCivil) {
+        this.codigo = codigo;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.cedula = cedula;
+        this.direccion = direccion;
+        this.Genero = Genero;
+        this.fechaDeNacimineto = fechaDeNacimineto;
+        this.estadoCivil = estadoCivil;
+    }
+
+    public int getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
+    }
+    
     public String getNombre() {
         return nombre;
     }
@@ -75,40 +101,33 @@ public class Contrayente {
     }
 
     public String getGenero() {
-        return genero;
+        return Genero;
     }
 
-    public void setGenero(String genero) {
-        this.genero = genero;
+    public void setGenero(String Genero) {
+        this.Genero = Genero;
     }
 
-    public String getFechaDeNacimiento() {
-        return fechaDeNacimiento;
+    public LocalDate getFechaDeNacimineto() {
+        return fechaDeNacimineto;
     }
 
-    public void setFechaDeNacimiento(String fechaDeNacimiento) {
-        this.fechaDeNacimiento = fechaDeNacimiento;
+    public void setFechaDeNacimineto(LocalDate fechaDeNacimineto) {
+        this.fechaDeNacimineto = fechaDeNacimineto;
     }
 
-    public String getLugar() {
-        return lugar;
+    public String getEstadoCivil() {
+        return estadoCivil;
     }
 
-    public void setLugar(String lugar) {
-        this.lugar = lugar;
+    public void setEstadoCivil(String estadoCivil) {
+        this.estadoCivil = estadoCivil;
     }
-    public void agregarPareja(Contrayente contrayente){
-    parejas.add(contrayente);
-    }
-    public void agregarTestigo(Testigo testigo){
-    testigos.add(testigo);
-    }
-    
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 83 * hash + Objects.hashCode(this.cedula);
+        int hash = 3;
+        hash = 23 * hash + Objects.hashCode(this.cedula);
         return hash;
     }
 
@@ -129,6 +148,11 @@ public class Contrayente {
         }
         return true;
     }
-    
+
+
+    @Override
+    public String toString() {
+        return "Persona{" + "codigo=" + codigo + ", nombre=" + nombre + ", apellido=" + apellido + ", cedula=" + cedula + ", direccion=" + direccion + ", Genero=" + Genero + ", fechaDeNacimineto=" + fechaDeNacimineto + ", estadoCivil=" + estadoCivil + '}';
+    }
     
 }
